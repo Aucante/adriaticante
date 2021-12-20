@@ -18,6 +18,8 @@ import vuetify from './plugins/vuetify'
 
 import Home from './components/Home'
 
+import BaseLayout from "./layout/BaseLayout";
+
 const routes = [
     { path: '/', component: Home, name: 'home' }
 ]
@@ -32,5 +34,6 @@ Vue.use(VueRouter)
 
 new Vue({
     router,
-    vuetify
+    vuetify,
+    components: {BaseLayout: BaseLayout}
 }).$mount('#app')
