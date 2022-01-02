@@ -12,6 +12,7 @@ class VueController extends AbstractController
 
     /**
      * @Route("/", name="vue")
+     * @Route("/{route}", requirements={"route"=".*"}, name="vue")
      */
     public function index(): Response
     {

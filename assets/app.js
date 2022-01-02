@@ -19,9 +19,12 @@ import vuetify from './plugins/vuetify'
 import Home from './components/Home'
 
 import BaseLayout from "./layout/BaseLayout";
+import Contact from "./assets/views/Contact/Contact";
+
 
 const routes = [
-    { path: '/', component: Home, name: 'home' }
+    { path: '/', component: Home, name: 'home' },
+    { path: '/contact', component: Contact, name: 'contact' },
 ]
 
 const router = new VueRouter({

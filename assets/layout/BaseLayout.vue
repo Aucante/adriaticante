@@ -1,6 +1,7 @@
 <template>
   <v-app v-cloak>
-    <v-app-bar short app >Symfony + Vuetify !!! OK</v-app-bar>
+    <v-app-bar short app >BaseLayout</v-app-bar>
+    <navbar />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -10,7 +11,12 @@
 </template>
 
 <script>
+import Navbar from "./../components/Navbar"
+
 export default {
   name: 'BaseLayout',
+  components: {
+    Navbar,
+  }
 }
 </script>

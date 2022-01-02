@@ -1,7 +1,7 @@
 <template>
   <v-alert
       type="success"
-  >{{ message }}</v-alert>
+  >{{ message }}test</v-alert>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
   name: 'Home',
   props: {},
   data: () => ({
-    message: 'Hello Symfony + Vue.js AIE',
+    message: 'Home component vue',
   }),
 }
 </script>
