@@ -1,7 +1,7 @@
 <template>
   <v-alert
       type="success"
-  >{{ message }}test</v-alert>
+  >{{ message }}test!</v-alert>
 </template>
 
 <script>

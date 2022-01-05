@@ -16,15 +16,23 @@ import VueRouter from 'vue-router'
 
 import vuetify from './plugins/vuetify'
 
-import Home from './components/Home'
 
 import BaseLayout from "./layout/BaseLayout";
-import Contact from "./assets/views/Contact/Contact";
+import Homepage from "./assets/views/Homepage";
+import Contact from "./assets/views/Contact";
+import About from "./assets/views/About";
+import Properties from "./assets/views/Properties";
+import SignUp from "./assets/views/SignUp";
+import SignIn from "./assets/views/SignIn";
 
 
 const routes = [
-    { path: '/', component: Home, name: 'home' },
+    { path: '/', component: Homepage, name: 'homepage' },
     { path: '/contact', component: Contact, name: 'contact' },
+    { path: '/about', component: About, name: 'about' },
+    { path: '/properties', component: Properties, name: 'properties' },
+    { path: '/signup', component: SignUp, name: 'signup' },
+    { path: '/signin', component: SignIn, name: 'signin' },
 ]
 
 const router = new VueRouter({

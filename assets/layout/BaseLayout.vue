@@ -7,15 +7,18 @@
         <router-view></router-view>
       </v-container>
     </v-main>
+    <footer-app />
   </v-app>
 </template>
 
 <script>
 import Navbar from "./../components/Navbar"
+import FooterApp from "../components/FooterApp"
 
 export default {
   name: 'BaseLayout',
   components: {
+    FooterApp,
     Navbar,
   }
 }
