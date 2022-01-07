@@ -3,9 +3,7 @@
     <v-app-bar short app >BaseLayout</v-app-bar>
     <navbar />
     <v-main>
-      <v-container fluid>
         <router-view></router-view>
-      </v-container>
     </v-main>
     <footer-app />
   </v-app>
