@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VueController extends AbstractController
 {
-    /* ("/app/{route}", requirements={"route"=".*"}, name="vue") */
 
     /**
      * @Route("/", name="vue")

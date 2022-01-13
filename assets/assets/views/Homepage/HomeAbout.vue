@@ -17,7 +17,7 @@
               class="white--text align-center"
               height="550"
               :src="img"
-              gradient="to top right, rgba(200,200,200,.5), rgba(200,200,200,.5)"
+              gradient="to top right, rgba(200,200,200,.6), rgba(200,200,200,.6)"
           >
             <v-row>
               <v-col cols="10" offset="1">

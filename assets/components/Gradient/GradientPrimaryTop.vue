@@ -4,8 +4,8 @@
 
 <style scoped>
 .gradient {
-  background-color: #eceff1;
-  background-image: linear-gradient(0deg, #eceff1 0%, #ffffff 56%);
+  background-color: #e0f2f1;
+  background-image: linear-gradient(0deg, #e0f2f1 0%, #ffffff 100%);
 }
 .height {
   height: 180px;

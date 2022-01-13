@@ -59,7 +59,7 @@ export default {
       title: "MORE PROPERTIES",
       subtitle: "NEED TO SEE MORE PROPERTIES?",
       btn: "DISCOVER",
-      img: require("./../../img/property7.jpg"),
+      img: require("./../../img/interior1.jpg"),
     };
   },
 };
@@ -71,7 +71,7 @@ export default {
   height: 100%;
   padding-top: 15%;
   padding-bottom: 15%;
-  opacity: 0.7;
+  opacity: 0.8;
   background-color: white;
 }
 </style>

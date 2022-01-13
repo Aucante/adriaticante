@@ -15,7 +15,7 @@ const opts = {
     theme: {
         themes: {
             light: {
-                primary: colors.blueGrey.lighten5, //#ECEFF1
+                primary: colors.teal.lighten5, //#E0F2F1
                 secondary: colors.blueGrey.darken4, //#263238
                 light: colors.blueGrey.lighten4, //#CFD8DC
                 font: colors.blueGrey.lighten1, //#78909C

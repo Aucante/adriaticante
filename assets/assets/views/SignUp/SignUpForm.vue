@@ -28,6 +28,66 @@
                 required
             ></v-text-field>
             <v-text-field
+                ref="lastName"
+                v-model="lastName"
+                :rules="[() => !!lastName || 'This field is required']"
+                :error-messages="errorMessages"
+                label="Last Name"
+                required
+            ></v-text-field>
+            <v-text-field
+                ref="firstName"
+                v-model="firstName"
+                :rules="[() => !!firstName || 'This field is required']"
+                :error-messages="errorMessages"
+                label="First Name"
+                required
+            ></v-text-field>
+            <v-text-field
+                ref="address"
+                v-model="address"
+                :rules="[
+                () => !!address || 'This field is required',
+                () =>
+                  (!!address && address.length <= 25) ||
+                  'Address must be less than 25 characters',
+                addressCheck,
+              ]"
+                label="Address Line"
+                counter="25"
+                required
+            ></v-text-field>
+            <v-text-field
+                ref="city"
+                v-model="city"
+                :rules="[() => !!city || 'This field is required', addressCheck]"
+                label="City"
+                required
+            ></v-text-field>
+            <v-text-field
+                ref="state"
+                v-model="state"
+                :rules="[() => !!state || 'This field is required']"
+                label="State/Province/Region"
+                required
+            ></v-text-field>
+            <v-text-field
+                ref="zip"
+                v-model="zip"
+                :rules="[() => !!zip || 'This field is required']"
+                label="ZIP / Postal Code"
+                required
+            ></v-text-field>
+            <v-autocomplete
+                ref="country"
+                v-model="country"
+                :rules="[() => !!country || 'This field is required']"
+                :items="countries"
+                label="Country"
+                placeholder="Select..."
+                required
+            ></v-autocomplete>
+            <v-text-field
                 v-model="password"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :rulesPassword="[rulesPassword.required, rulesPassword.min]"
