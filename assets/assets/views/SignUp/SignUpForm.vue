@@ -27,6 +27,7 @@
                 label="Email"
                 required
             ></v-text-field>
+            <!--
             <v-text-field
                 ref="lastName"
                 v-model="lastName"
@@ -87,6 +88,7 @@
                 placeholder="Select..."
                 required
             ></v-autocomplete>
+            -->
             <v-text-field
                 v-model="password"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -135,6 +137,8 @@
 </template>
 
 <script>
+import axios from './../../../api/axios'
+
 export default {
   data: () => ({
     logo: require("./../../logo/adriaticante.png"),
@@ -406,11 +410,23 @@ export default {
     submit() {
       this.formHasErrors = false;
 
-      Object.keys(this.form).forEach((f) => {
-        if (!this.form[f]) this.formHasErrors = true;
-
-        this.$refs[f].validate(true);
-      });
+      // Object.keys(this.form).forEach((f) => {
+      //   if (!this.form[f]) this.formHasErrors = true;
+      //
+      //   this.$refs[f].validate(true);
+      // });
+      axios.post('/user', {
+        user: {
+          email: this.email,
+          password: this.password
+        }
+      })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
   },
 };

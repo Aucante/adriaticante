@@ -21,23 +21,24 @@
           >
             <v-row>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
-                <v-text-field label="First Name"></v-text-field>
+                <v-text-field v-model="firstName" label="First Name"></v-text-field>
               </v-col>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
-                <v-text-field label="Last Name"></v-text-field>
+                <v-text-field v-model="lastName" label="Last Name"></v-text-field>
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
-                <v-text-field label="Email"></v-text-field>
+                <v-text-field v-model="email" label="Email"></v-text-field>
               </v-col>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
-                <v-text-field label="Phone"></v-text-field>
+                <v-text-field v-model="phone" label="Phone"></v-text-field>
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12" sm="12" md="8" lg="8" xl="8">
                 <v-textarea
+                    v-model="message"
                     label="Message"
                     color="secondary"
                     append-icon="mdi-message"
@@ -58,6 +59,7 @@
                     class="font-weight-light rounded-0"
                     width="200"
                     height="48"
+                    @click="submit"
                 >
                   {{ btn }}
                 </v-btn>
@@ -72,11 +74,37 @@
 
 
 <script>
+import axios from "../../../api/axios";
+
 export default {
   data() {
     return {
       btn: "send",
+      lastName: null,
+      firstName: null,
+      email: null,
+      phone: null,
+      message: null
     };
   },
+  methods: {
+    submit() {
+      axios.post('/contact', {
+        contact: {
+          lastname: this.lastName,
+          firstname: this.firstName,
+          email: this.email,
+          phone: this.phone,
+          message: this.message,
+        }
+      })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+  }
 };
 </script>
