@@ -20,6 +20,7 @@
               offset-xl="2"
           >
             <v-row>
+              {{ errors['[lastname]'] }}
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="firstName" label="First Name"></v-text-field>
               </v-col>
@@ -79,6 +80,7 @@ import axios from "../../../api/axios";
 export default {
   data() {
     return {
+      errors: {},
       btn: "send",
       lastName: null,
       firstName: null,
@@ -100,10 +102,13 @@ export default {
       })
           .then(function (response) {
             console.log(response);
+            console.log(response.data.errors);
+            this.errors = response.data.errors;
+
           })
-          .catch(function (error) {
-            console.log(error);
-          });
+          //.catch(function (error) {
+            //console.log(error);
+          //});
     }
   }
 };

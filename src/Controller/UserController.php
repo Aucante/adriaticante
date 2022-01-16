@@ -37,8 +37,6 @@ class UserController extends AbstractController
             $user->setPassword($userRaw['password']);
             $entityManager->persist($user);
             $entityManager->flush();
-
-
         }
 
         return new JsonResponse('');
