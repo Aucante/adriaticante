@@ -20,7 +20,6 @@
               offset-xl="2"
           >
             <v-row>
-              {{ errors['[lastname]'] }}
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="firstName" label="First Name"></v-text-field>
               </v-col>
@@ -31,6 +30,11 @@
             <v-row>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="email" label="Email"></v-text-field>
+                <div v-for="(error, i) of v$.email.$errors" :key="i">
+                  <p class="red--text">
+                    {{ error.$message }}
+                  </p>
+                </div>
               </v-col>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="phone" label="Phone"></v-text-field>
@@ -46,6 +50,11 @@
                     clearable
                     clear-icon="mdi-close-circle"
                 ></v-textarea>
+                <div v-for="(error, i) of v$.message.$errors" :key="i">
+                  <p class="red--text">
+                    {{ error.$message }}
+                  </p>
+                </div>
               </v-col>
               <v-col
                   cols="12"
@@ -76,21 +85,60 @@
 
 <script>
 import axios from "../../../api/axios";
+import { required, minLength, email } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
-      errors: {},
       btn: "send",
-      lastName: null,
-      firstName: null,
-      email: null,
-      phone: null,
-      message: null
+      lastName: '',
+      firstName: '',
+      email: '',
+      phone: '',
+      message: '',
+      requiredNameLength: 2,
+    };
+  },
+  validations() {
+    return {
+      lastname: {
+        minLength: minLength(this.requiredNameLength),
+        required,
+      },
+      firstname: {
+        minLength: minLength(this.requiredNameLength),
+        required,
+      },
+      email: {
+        email,
+        required,
+      },
+      phone: {
+        required,
+      },
+      message: {
+        minLength: minLength(this.requiredNameLength),
+        required,
+      },
     };
   },
   methods: {
+    // submit() {
+    //   this.v$.$validate();
+    //   if (!this.v$.$error) {
+    //     alert("Form successfully submitted");
+    //   } else {
+    //     alert("Form failed");
+    //   }
+    // },
+
     submit() {
+      this.v$.$validate();
       axios.post('/contact', {
         contact: {
           lastname: this.lastName,
@@ -102,14 +150,12 @@ export default {
       })
           .then(function (response) {
             console.log(response);
-            console.log(response.data.errors);
-            this.errors = response.data.errors;
-
           })
-          //.catch(function (error) {
-            //console.log(error);
-          //});
+          .catch(function (error) {
+            console.log(error);
+          });
+
     }
-  }
+    },
 };
 </script>

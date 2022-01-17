@@ -50,6 +50,15 @@
         >
           {{ btn }}
         </v-btn>
+        <a href="/test">
+          <v-btn
+              depressed
+              color="red primary--text"
+              class="font-weight-light rounded-0 hidden-sm-and-down mr-5"
+          >
+            {{ btn }}
+          </v-btn>
+        </a>
 
         <v-icon
             size="35"

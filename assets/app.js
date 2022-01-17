@@ -13,6 +13,7 @@ import './bootstrap';
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueCompositionAPI from '@vue/composition-api'
 
 import vuetify from './plugins/vuetify'
 
@@ -41,7 +42,7 @@ const router = new VueRouter({
     routes
 })
 
-Vue.use(VueRouter)
+Vue.use(VueRouter, VueCompositionAPI)
 
 new Vue({
     router,
