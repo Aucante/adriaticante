@@ -14,6 +14,9 @@ import './bootstrap';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueCompositionAPI from '@vue/composition-api'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
 
 import vuetify from './plugins/vuetify'
 
@@ -49,3 +52,5 @@ new Vue({
     vuetify,
     components: {BaseLayout: BaseLayout}
 }).$mount('#app')
+
+AOS.init();

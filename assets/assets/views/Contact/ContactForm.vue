@@ -22,9 +22,19 @@
             <v-row>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="firstName" label="First Name"></v-text-field>
+                <div v-for="(error, i) of v$.firstName.$errors" :key="i">
+                  <p class="red--text">
+                    {{ error.$message }}
+                  </p>
+                </div>
               </v-col>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="lastName" label="Last Name"></v-text-field>
+                <div v-for="(error, i) of v$.lastName.$errors" :key="i">
+                  <p class="red--text">
+                    {{ error.$message }}
+                  </p>
+                </div>
               </v-col>
             </v-row>
             <v-row>
@@ -38,6 +48,11 @@
               </v-col>
               <v-col cols="6" sm="6" md="4" lg="4" xl="4">
                 <v-text-field v-model="phone" label="Phone"></v-text-field>
+                <div v-for="(error, i) of v$.phone.$errors" :key="i">
+                  <p class="red--text">
+                    {{ error.$message }}
+                  </p>
+                </div>
               </v-col>
             </v-row>
             <v-row>
@@ -85,7 +100,7 @@
 
 <script>
 import axios from "../../../api/axios";
-import { required, minLength, email } from "@vuelidate/validators";
+import { required, minLength, maxLength,  email } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 
 
@@ -101,17 +116,21 @@ export default {
       email: '',
       phone: '',
       message: '',
-      requiredNameLength: 2,
+      requiredMinLength: 2,
+      requiredMaxNameLength: 25,
+      requiredMaxMessageLength: 255,
     };
   },
   validations() {
     return {
-      lastname: {
-        minLength: minLength(this.requiredNameLength),
+      lastName: {
+        minLength: minLength(this.requiredMinLength),
+        maxLength: maxLength(this.requiredMaxNameLength),
         required,
       },
-      firstname: {
-        minLength: minLength(this.requiredNameLength),
+      firstName: {
+        minLength: minLength(this.requiredMinLength),
+        maxLength: maxLength(this.requiredMaxNameLength),
         required,
       },
       email: {
@@ -122,7 +141,8 @@ export default {
         required,
       },
       message: {
-        minLength: minLength(this.requiredNameLength),
+        minLength: minLength(this.requiredMinLength),
+        maxLength: maxLength(this.requiredMaxMessageLength),
         required,
       },
     };

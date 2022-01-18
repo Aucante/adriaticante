@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Optional;
@@ -23,18 +25,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/contact", name="contact", methods={"POST"})
+     * @Route("/contact", name="contact_post", methods={"POST"})
      */
     public function create(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): JsonResponse
     {
         $contactRaw = json_decode($request->getContent(), JSON_OBJECT_AS_ARRAY)["contact"];
         $errors = $validator->validate($contactRaw, [
             new Collection([
-                'lastname' => new Length(['min' => 2, 'max' => 4, 'minMessage' => 'trop petit', 'maxMessage' => 'trop grand']),
-                'firstname' => new Optional(),
-                'email' => new Optional(),
-                'phone' => new Optional(),
-                'message' => new Optional(),
+                'lastname' => new Length(['min' => 2, 'max' => 25, 'minMessage' => 'This field should be at least 2 long', 'maxMessage' => 'The maximum length allowed is 25']),
+                'firstname' => new Length(['min' => 2, 'max' => 25, 'minMessage' => 'This field should be at least 2 long', 'maxMessage' => 'The maximum length allowed is 25']),
+                'email' => new Email(),
+                'phone' => new NotBlank(),
+                'message' => new Length(['min' => 2, 'max' => 255, 'minMessage' => 'This field should be at least 2 long', 'maxMessage' => 'The maximum length allowed is 255']),
             ])
         ]);
 
@@ -52,7 +54,7 @@ class ContactController extends AbstractController
 
         }
 
-        return new JsonResponse(['errors' => $errorsAsArray]);
+        return new JsonResponse(['errors' => $errorsAsArray], count($errors) ? 400 : 201 );
     }
 
     private function getErrorsAsArray(ConstraintViolationListInterface $constraintViolationList): array
@@ -67,4 +69,17 @@ class ContactController extends AbstractController
         }
         return $errors;
     }
+
+    /**
+     * @Route("/contact", name="contact_get", methods={"GET"})
+     */
+    public function getContact(Request $request, ContactRepository $contactRepository): JsonResponse
+    {
+        $id = $request->query->get('ID');
+        $contactForm = $contactRepository->find($id);
+
+        return new JsonResponse(['contact' => $contactForm], $contactForm ? 200 : 404);
+    }
+
+
 }

@@ -6,10 +6,11 @@ use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=ContactRepository::class)
  */
-class Contact
+class Contact implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -107,5 +108,18 @@ class Contact
         $this->message = $message;
 
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'lastname' => $this->getLastname(),
+            'firstname' => $this->getFirstname(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getPhone(),
+            'message' => $this->getMessage(),
+        ];
+
     }
 }

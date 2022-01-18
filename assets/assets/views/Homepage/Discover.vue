@@ -34,6 +34,7 @@
                   <v-hover v-slot="{ hover }">
                     <v-card
                         data-aos="flip-up"
+                        data-aos-duration="1000"
                         class="mx-auto my-5"
                         color="transparent"
                         height="250"

@@ -24,6 +24,7 @@
         "@vue/composition-api": "^1.4.4",
         "@vuelidate/core": "^2.0.0-alpha.34",
         "@vuelidate/validators": "^2.0.0-alpha.26",
+        "aos": "^2.3.4",
         "axios": "^0.24.0",
         "vue-mdijs": "^0.4.3",
         "vue-router": "^3.5.3",
