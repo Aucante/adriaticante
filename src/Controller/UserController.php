@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Email;
@@ -44,13 +44,14 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/registered", name="user_registered")
+     * @Route("/user", name="user_get", methods={"GET"})
      */
-    public function formValidated(): Response
+    public function getUserId(Request $request, UserRepository $userRepository): JsonResponse
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
+        $id = $request->query->get('ID');
+        $userForm = $userRepository->find($id);
+
+        return new JsonResponse(['user' => $userForm], $userForm ? 200 : 404);
 
     }
 }
